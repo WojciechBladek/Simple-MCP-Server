@@ -4,6 +4,7 @@
 - Typescript
 - Nodejs
 - MCP
+- GitHub Copilot
 
 ## Example of use MCP tool
 - Clone repo
