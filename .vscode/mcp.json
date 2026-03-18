@@ -1,6 +1,6 @@
 {
   "servers": {
-    "mcp-server-countries": {
+    "mcp-server": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "tsx", "server.ts"]
