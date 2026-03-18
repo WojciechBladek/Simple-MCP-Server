@@ -1,9 +1,9 @@
 # SIMPLE MCP SERVER
 
 ### Tech
--Typescript
--Nodejs
--MCP
+- Typescript
+- Nodejs
+- MCP
 
 ## Example of use MCP tool
 - Clone repo
