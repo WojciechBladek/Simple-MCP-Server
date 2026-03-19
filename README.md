@@ -1,14 +1,19 @@
 # SIMPLE MCP SERVER
 
 ### Tech
+
 - Typescript
 - Nodejs
 - MCP
 - GitHub Copilot
 
 ## Example of use MCP tool
+
 - Clone repo
 - Integrate VSC with Copilot
-- Ask copilot to use mcp tools to generate human readable short summary details about <userName>('Emily' for example)
 
-![ai_answer](AI_ANSWER.png)
+## Ask copilot
+
+- Use tool to get all users names from the REST API
+- Use tool to get specific user details from the REST API
+- Use tool to get available user summary details from the REST API
