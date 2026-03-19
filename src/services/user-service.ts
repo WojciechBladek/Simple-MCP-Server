@@ -1,5 +1,5 @@
 import { ApiEndpoint } from "@utils/api.util.js";
-import type { User, UsersResponse } from "@model/user.model.js";
+import type { User, UserSummary, UsersResponse } from "@model/user.model.js";
 
 let usersCache: User[] | null = null;
 
@@ -39,4 +39,24 @@ export function findUserByName(
 
     return fullName.includes(normalizedUserName);
   });
+}
+
+export function toUserSummary(user: User): UserSummary {
+  return {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    phone: user.phone,
+    role: user.role,
+    company: {
+      name: user.company.name,
+      department: user.company.department,
+      title: user.company.title,
+    },
+  };
+}
+
+export function formatUserSummary(summary: UserSummary): string {
+  return `${summary.firstName} ${summary.lastName} | ${summary.email} | ${summary.role} | ${summary.company.title} at ${summary.company.name}`;
 }
