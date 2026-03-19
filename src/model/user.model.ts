@@ -41,6 +41,8 @@ export const cryptoSchema = z.object({
   network: z.string(),
 });
 
+export const userRoleSchema = z.enum(["admin", "moderator", "user"]);
+
 export const userSchema = z.object({
   id: z.number(),
   firstName: z.string(),
@@ -69,11 +71,29 @@ export const userSchema = z.object({
   ssn: z.string(),
   userAgent: z.string(),
   crypto: cryptoSchema,
-  role: z.enum(["admin", "moderator", "user"]),
+  role: userRoleSchema,
 });
 
 export const usersListSchema = z.object({
   users: z.array(userSchema),
+});
+
+export const userSummarySchema = z.object({
+  id: z.number(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  role: userRoleSchema,
+  company: z.object({
+    name: z.string(),
+    department: z.string(),
+    title: z.string(),
+  }),
+});
+
+export const usersSummaryListSchema = z.object({
+  users: z.array(userSummarySchema),
 });
 
 export type Coordinates = z.infer<typeof coordinatesSchema>;
@@ -83,4 +103,5 @@ export type Bank = z.infer<typeof bankSchema>;
 export type Company = z.infer<typeof companySchema>;
 export type Crypto = z.infer<typeof cryptoSchema>;
 export type User = z.infer<typeof userSchema> & Record<string, unknown>;
+export type UserSummary = z.infer<typeof userSummarySchema>;
 export type UsersResponse = z.infer<typeof usersListSchema>;

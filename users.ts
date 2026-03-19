@@ -2,11 +2,13 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import z from "zod";
 
-import { userSchema, usersListSchema } from "@model/user.model.js";
+import { userSchema, usersListSchema, usersSummaryListSchema } from "@model/user.model.js";
 import {
   fetchUsers,
   findUserByName,
   formatUserName,
+  formatUserSummary,
+  toUserSummary,
 } from "@services/user-service.js";
 
 const server = new McpServer({
@@ -103,6 +105,29 @@ server.registerTool(
         },
       ],
       structuredContent: user,
+    };
+  },
+);
+
+server.registerTool(
+  "getAvailableUserDetails",
+  {
+    description: "Get available user summary details for all users",
+    inputSchema: z.object({}),
+    outputSchema: usersSummaryListSchema,
+  },
+  async () => {
+    const users = await fetchUsers();
+    const summaries = users.map(toUserSummary);
+
+    return {
+      content: [
+        {
+          type: "text",
+          text: summaries.map(formatUserSummary).join("\n"),
+        },
+      ],
+      structuredContent: { users: summaries },
     };
   },
 );
